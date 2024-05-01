@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2020", // Specifies the output JavaScript version
+    "module": "NodeNext", // Module system for Node.js
+    "declaration": true, // Generate .d.ts declaration files
+    "outDir": "./dist", // Output directory for compiled files
+    "strict": true, // Enable strict type checking
+    "esModuleInterop": true, // Allows compatibility with ES modules
+    "forceConsistentCasingInFileNames": true, // Enforce consistent casing in file names
+    "skipLibCheck": true, // Skip type-checking of library files
+    "moduleResolution": "NodeNext", // Module resolution strategy
+    "sourceMap": true, // Generate source maps
+    "resolveJsonModule": true, // Allow importing JSON files
+    "experimentalDecorators": true, // Enable experimental decorators
+    "emitDecoratorMetadata": true // Emit metadata for decorators
+  },
+  "include": ["src"], // Folders to include in compilation
+  "exclude": ["node_modules", "dist", "test"] // Folders to exclude from compilation
+}
