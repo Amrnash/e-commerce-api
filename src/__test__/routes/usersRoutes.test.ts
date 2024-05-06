@@ -271,7 +271,7 @@ describe("PATCH /users/:id/roles/remove", () => {
       { userId: mockUser._id, roles: mockUser.roles },
       process.env.SECRET_KEY!
     );
-
+    mockUser.roles.push(role);
     (getUserById as Mock).mockResolvedValueOnce(mockUser);
     const { statusCode } = await request(app)
       .patch("/users/1/roles/remove")
