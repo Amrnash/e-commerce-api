@@ -42,7 +42,7 @@ export async function getProductById(req: Request, res: Response) {
 
 export async function createProduct(req: Request, res: Response) {
   const { name, description, price, category, stock, image } = req.body;
-  const newProduct = productsService.createProduct({
+  const newProduct = await productsService.createProduct({
     name,
     description,
     price,
@@ -69,6 +69,7 @@ export async function updateProductById(req: Request, res: Response) {
   if (!updatedProduct) {
     throw new NotFoundError("product not found");
   }
+  return res.send({ updatedProduct });
 }
 
 export const deleteProduct = async (req: Request, res: Response) => {
@@ -80,5 +81,5 @@ export const deleteProduct = async (req: Request, res: Response) => {
     throw new NotFoundError("product not found");
   }
 
-  res.json({ message: "Product deleted successfully" });
+  return res.json({ message: "Product deleted successfully" });
 };

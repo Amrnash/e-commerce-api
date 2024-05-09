@@ -34,7 +34,7 @@ export async function createProduct(product: ProductCreate) {
     stock: product.stock,
     image: product.image,
   });
-  return (await newProduct.save()).toObject();
+  return newProduct.save();
 }
 
 export const updateProductById = async (

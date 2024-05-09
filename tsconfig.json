@@ -12,7 +12,7 @@
     "sourceMap": true, // Generate source maps
     "resolveJsonModule": true, // Allow importing JSON files
     "experimentalDecorators": true, // Enable experimental decorators
-    "emitDecoratorMetadata": true // Emit metadata for decorators
+    "emitDecoratorMetadata": true
   },
   "include": ["src"], // Folders to include in compilation
   "exclude": ["node_modules", "dist", "test"] // Folders to exclude from compilation
