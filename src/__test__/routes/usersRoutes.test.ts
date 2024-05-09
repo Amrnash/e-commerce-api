@@ -265,7 +265,7 @@ describe("PATCH /users/:id/roles/remove", () => {
     expect(statusCode).toBe(400);
   });
 
-  it("Removes a role to user", async () => {
+  it("Removes a role from a user user", async () => {
     const role = "test";
     const token = jwt.sign(
       { userId: mockUser._id, roles: mockUser.roles },

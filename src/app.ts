@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import { userRouter } from "./routes/usersRoutes.js";
 import morgan from "morgan";
+import { productsRouter } from "./routes/productsRoutes.js";
 
 const app = express();
 
@@ -28,6 +29,7 @@ process.on("SIGINT", async () => {
 app.use(express.json());
 app.use(morgan("dev"));
 app.use("/users", userRouter);
+app.use("/products", productsRouter);
 
 app.get("/", (req, res) => {
   res.send("hello world");

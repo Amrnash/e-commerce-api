@@ -40,4 +40,4 @@ export interface ProductDocument extends Document {
 
 const Product = mongoose.model<ProductDocument>("Product", productSchema);
 
-export default Product;
+export { Product };
