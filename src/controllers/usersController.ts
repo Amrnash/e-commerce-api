@@ -10,7 +10,7 @@ import {
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 
-import { sendEmail } from "../utils/sendEmail.js";
+import { EmailSender } from "../utils/EmailSender.js";
 
 export async function signup(req: Request, res: Response) {
   const { username, password, email } = req.body;
@@ -29,7 +29,9 @@ export async function signup(req: Request, res: Response) {
   });
 
   const confirmationLink = `${process.env.HOST}/confirm-email/${confirmationToken}`;
-  await sendEmail(email, confirmationLink);
+  const sender = new EmailSender();
+  sender.send(email, confirmationLink);
+
   const token = jwt.sign(
     { userId: user._id, roles: user.roles },
     process.env.SECRET_KEY!
