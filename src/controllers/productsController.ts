@@ -66,6 +66,9 @@ export async function updateProductById(req: Request, res: Response) {
   const { id } = req.params;
   const { name, description, price, category, stock } = req.body;
   const product = await productsService.getProductById(id);
+  if (!product) {
+    throw new NotFoundError("product not found");
+  }
 
   let imageUrl: string | undefined;
   if (req.file) {
@@ -78,19 +81,18 @@ export async function updateProductById(req: Request, res: Response) {
     imageUrl = await imageStorage.uploadImage(req.file.buffer);
   }
 
-  const updatedProduct = await productsService.updateProductById(id, {
-    name,
-    description,
-    price,
-    category,
-    stock,
-    image: imageUrl,
-  });
+  if (product) {
+    product.name = name;
+    product.description = description;
+    product.price = price;
+    product.category = category;
+    product.stock = stock;
+    product.image = imageUrl;
 
-  if (!updatedProduct) {
-    throw new NotFoundError("product not found");
+    await product.save();
   }
-  return res.send({ updatedProduct });
+
+  return res.send({ product });
 }
 
 export const deleteProduct = async (req: Request, res: Response) => {

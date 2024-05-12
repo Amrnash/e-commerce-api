@@ -5,6 +5,36 @@ import * as productsService from "../../services/productsService.js";
 import { clearDatabase } from "../../utils/utils.js";
 
 describe("Products Service", () => {
+  const fakeProducts = [
+    {
+      name: "test",
+      description: "testing 1 description",
+      price: 200,
+      category: "test",
+      stock: 20,
+    },
+    {
+      name: "test 2",
+      description: "testing 2 description",
+      price: 100,
+      category: "test",
+      stock: 10,
+    },
+    {
+      name: "test 3",
+      description: "testing 3 description",
+      price: 50,
+      category: "test",
+      stock: 4,
+    },
+    {
+      name: "test 4",
+      description: "testing 4 description",
+      price: 40,
+      category: "test",
+      stock: 6,
+    },
+  ];
   beforeAll(async () => {
     await mongoose.connect(process.env.TEST_MONGO_DB!);
   });
@@ -13,43 +43,12 @@ describe("Products Service", () => {
     await mongoose.disconnect();
   });
 
-  beforeEach(() => {
+  beforeEach(async () => {
     clearDatabase();
+    await Product.insertMany(fakeProducts);
   });
+
   describe("getPaginatedProducts()", async () => {
-    const fakeProducts = [
-      {
-        name: "test",
-        description: "testing 1 description",
-        price: 200,
-        category: "test",
-        stock: 20,
-      },
-      {
-        name: "test 2",
-        description: "testing 2 description",
-        price: 100,
-        category: "test",
-        stock: 10,
-      },
-      {
-        name: "test 3",
-        description: "testing 3 description",
-        price: 50,
-        category: "test",
-        stock: 4,
-      },
-      {
-        name: "test 4",
-        description: "testing 4 description",
-        price: 40,
-        category: "test",
-        stock: 6,
-      },
-    ];
-    beforeEach(async () => {
-      await Product.insertMany(fakeProducts);
-    });
     it("gets number of products equal to provided limit", async () => {
       const products = await productsService.getPaginatedProducts(1, 2, {});
       expect(products.length).toBe(2);
