@@ -4,7 +4,7 @@ import { Product, ProductDocument } from "../models/product.js";
 type ProductCreate = {
   name: string;
   description: string;
-  price: string;
+  price: number;
   category: string;
   stock: number;
   image?: string;
